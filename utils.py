@@ -1,8 +1,17 @@
 import json
-import sys  
+import sys
+
+import discord
+
 from logger import setup_logger
 
 logger = setup_logger()
+
+INTENTS_MAP = {
+    "members": "members",                 
+    "presences": "presences",            
+    "message_content": "message_content"  
+}
 
 
 def get_config(config_path: str) -> dict:
@@ -23,4 +32,21 @@ def get_config(config_path: str) -> dict:
     return config
 
 
+def get_intents(config: dict) -> discord.Intents:
+    if config.get("intents") == "all":
+        return discord.Intents.all()
+
+    intents = discord.Intents.default()
+
+    for name in config.get("intents", []):
+        attr = INTENTS_MAP.get(name.lower())
+        if attr:
+            setattr(intents, attr, True)
+        else:
+            logger.warning(f"Unknown intent '{name}' in config.json — skipping.")
+            
+    return intents
+
+
 config = get_config("config.json")
+intents = get_intents(config)

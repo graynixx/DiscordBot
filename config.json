@@ -1,7 +1,8 @@
 {
 	"bot_name": "DiscordBot",
 	"prefix": ".",
-	"bot_id": "",
+	"bot_id": "1317127039840550942",
+	"intents": "all",
 
 	"status_message": "",
 	"status_type": ""

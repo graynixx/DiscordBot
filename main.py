@@ -9,7 +9,7 @@ from colorama import Fore, init
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from utils import config, logger
+from utils import config, intents, logger
 
 load_dotenv()
 init(autoreset=True)
@@ -28,8 +28,6 @@ print(
     f"{Fore.CYAN}Autor: {Fore.WHITE}Graynix\n"
     f"{Fore.CYAN}Github: {Fore.WHITE}github.com/graynixx"
     )
-
-intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix=PREFIX, intents=intents)
 
